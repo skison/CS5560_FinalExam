@@ -1,5 +1,5 @@
 # FinalExam
-To run in browser: ```$ npm install```
+To run in browser: ```$ ionic serve```
 
 To run in AVD: ```$ ionic cordova run android```
 
