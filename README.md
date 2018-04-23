@@ -1,2 +1,2 @@
 # FinalExam
-To run in browser: $ npm install
+To run in browser: ```$ npm install```
