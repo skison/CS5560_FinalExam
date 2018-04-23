@@ -1,0 +1,19 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card" *ngIf="!auth.loggedIn">
+  <h4 class="card-header">Login</h4>
+  <div class="card-body">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-item [ngClass]="setClassUsername()">
+        <ion-input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus></ion-input>
+      </ion-item>
+      <ion-item [ngClass]="setClassUsername()">
+        <ion-input class="form-control" type="password" name="password" formControlName="password" placeholder="Password"></ion-input>
+      </ion-item>
+        <button ion-button color="secondary" type="submit" [disabled]="!loginForm.valid"><i class="fa fa-sign-in"></i> Login</button>
+    </form>
+  </div>
+</div>
+<div class="card" *ngIf="auth.loggedIn">
+  <h4 class="card-header">You are logged in!</h4>
+</div>

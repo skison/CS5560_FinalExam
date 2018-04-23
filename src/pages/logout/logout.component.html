@@ -1,0 +1,11 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card" *ngIf="auth.loggedIn">
+  <h4 class="card-header">Logout</h4>
+  <div class="card-body">
+    <button ion-button color="danger" (click)="logout()"><i class="fa fa-times"></i> Logout</button>
+  </div>
+</div>
+<div class="card" *ngIf="!auth.loggedIn">
+  <h4 class="card-header">You are logged out!</h4>
+</div>

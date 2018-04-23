@@ -1,0 +1,30 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card">
+  <h4 class="card-header">Register</h4>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <ion-item [ngClass]="setClassFirstname()">
+        <ion-input type="text" name="firstname" formControlName="firstname" placeholder="First Name" autofocus required></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="setClassLastname()">
+        <ion-input type="text" name="lastname" formControlName="lastname" placeholder="Last Name" required></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="setClassUsername()">
+        <ion-input  type="text" name="username" formControlName="username" placeholder="Username (must be unique)" required></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="setClassEmail()">
+        <ion-input type="email" name="email" formControlName="email" placeholder="Email" required></ion-input>
+      </ion-item>
+
+      <ion-item [ngClass]="setClassPassword()">
+        <ion-input type="password" name="password" formControlName="password" placeholder="Password" required></ion-input>
+      </ion-item>
+
+      <button ion-button color="secondary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
+    </form>
+  </div>
+</div>

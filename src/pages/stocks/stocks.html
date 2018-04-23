@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Stocks
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<ion-content padding>
+<div class="card mb-3" *ngIf="!isLoading && auth.loggedIn">
+
+  <button ion-button (click)="getAllStocks()" style="display:block"><i class="fa fa-times"></i> Refresh Page</button>
+
+  <svg dataNgInit="drawBarChart()" id="barchart" width="400" height="400"></svg>
+
+  <h4 class="card-header">Stocks</h4>
+  <div class="card-body">
+    
+	<form *ngIf="isEditing" class="form-inline" #form="ngForm" (ngSubmit)="editStock(stock)">
+	  <input class="form-control mr-2" type="text" name="stocksymbol" [(ngModel)]="stock.stocksymbol" placeholder="Symbol" required>
+	  <input class="form-control mr-2" type="number" name="stockamount" [(ngModel)]="stock.stockamount" placeholder="Amount" min="0" required>
+	  <input class="form-control mr-2" type="number" name="stockprice" [(ngModel)]="stock.stockprice" placeholder="Price" step="any" min="0" required>
+	  <button ion-button type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
+	  <button ion-button (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+	</form>
+    
+  </div>
+
+
+  <div class="card" *ngIf="!isEditing">
+    <h4 class="card-header">Your Stocks ({{stocks.length}})</h4>
+    <div class="card-body">
+
+    <ion-list>
+      <ion-item *ngFor="let stock of stocks">
+        <h2>{{stock.stocksymbol}}</h2>
+        <h3>{{stock.stockamount}} shares</h3>
+        <h3>Buy Price Per Share: ${{stock.stockprice}}</h3>
+        <h3>Total Buy Price: ${{stock.stockamount*stock.stockprice}}</h3>
+        <h3 *ngIf="stock.currentvalue >= 0">Current Value Per Share: ${{stock.currentvalue}}</h3>               <h3 *ngIf="stock.currentvalue == null">Current Value Per Share: loading...</h3> <h3 *ngIf="stock.currentvalue < 0">Current Value Per Share: load failed</h3>
+        <h3 *ngIf="stock.currentvalue >= 0">Current Total Value: ${{stock.stockamount*stock.currentvalue}}</h3> <h3 *ngIf="stock.currentvalue == null">Current Total Value: loading...</h3>     <h3 col-2 *ngIf="stock.currentvalue < 0">Current Total Value: load failed</h3>
+        <button ion-button (click)="enableEditing(stock)"><i class="fa fa-pencil"></i> Edit</button> 
+        <button ion-button color="danger" (click)="deleteStock(stock)"><i class="fa fa-trash"></i> Delete</button>
+      </ion-item>
+    </ion-list>
+    <ion-item *ngIf="stocks.length === 0">
+      <h2>There are no stocks in the DB. Add new stocks below.</h2>
+    </ion-item>
+    
+      <form class="form-inline" [formGroup]="addStockForm" (ngSubmit)="addStock()">
+      <ion-item>
+        <ion-input type="text" name="stocksymbol" formControlName="stocksymbol" placeholder="Symbol"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" name="stockamount" formControlName="stockamount" placeholder="Amount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" name="stockprice" formControlName="stockprice" placeholder="Price"></ion-input>
+      </ion-item>
+        <button ion-button color="secondary" type="submit" [disabled]="!addStockForm.valid"><i class="fa fa-floppy-o"></i> Add Stock</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+<div class="card mb-3" *ngIf="!auth.loggedIn">
+  <h4 class="card-header">You must be logged in to view your stocks!</h4>
+</div>
+</ion-content>
