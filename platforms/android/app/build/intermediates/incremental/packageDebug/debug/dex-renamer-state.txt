@@ -1,0 +1,4 @@
+#Mon Apr 23 09:05:19 EDT 2018
+base.0=C\:\\Users\\samue\\Desktop\\WMU Stuff\\Classes\\8th Semester\\CS 5560 Network Programming\\FinalExam\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+renamed.0=classes.dex
+file.0=C\:\\Users\\samue\\Desktop\\WMU Stuff\\Classes\\8th Semester\\CS 5560 Network Programming\\FinalExam\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
